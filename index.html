@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banco</title>
+
+    <script>
+        var saldo = 100.5; //Float
+        var extrato = [];
+
+        function inicio() {
+            var nome = prompt('Digite seu nome:');
+            if (nome) {
+                alert('Olá ' +  nome  + ', é um prazer ter você por aqui!');
+            }else  {
+                inicio();
+
+            }
+         
+
+            var senha = prompt('Digite a senha'); //E
+            if (senha === '3589'){
+                alert('Bem vindo ' + nome  );
+            }else {
+                alert('Senha incorreta.operaçao não autorizada');
+            }//u
+            menu();
+        }
+
+        function menu() {
+            var escolha = parseInt(
+                prompt(
+                    'Selecione uma opção:\n1.) Saldo\n2.) Extrato\n3.) Saque\n4.) Depósito\n5.) Transferência\n6.) Sair'
+                )
+            );
+            switch (escolha) {
+                case 1:
+                    ver_saldo();
+                    break;
+                case 2:
+                    ver_extrato();
+                    break;
+                case 3:
+                    fazer_saque();
+                    break;
+                case 4:
+                    fazer_deposito();
+                    break;
+                case 5:
+                    fazer_transferencia();
+                    break;
+                case 6:
+                    sair();
+                    break;
+                default:
+                    erro();
+                    break;
+            }
+        }
+
+        function ver_saldo() {
+            var senha = prompt('Digite sua senha:');
+            if (senha === '3589') {
+                alert('Seu saldo atual é: ' + saldo);
+            } else {
+                alert('Senha incorreta. Operação não autorizada.');
+            }
+            menu();
+        }
+
+         // Função para solicitar a senha //EUT
+         function solicitarSenha() {
+            const senha = prompt("Digite sua senha: ");
+            if (senha !== "3589") {
+                console.log("\nSenha incorreta. Tente novamente.");
+                solicitarSenha();
+            }
+            }
+
+        function ver_extrato() {
+            var senha = prompt('Digite sua senha:');
+            if (senha === '3589') {
+                var extratoString = '';
+                for (var i = 0; i < extrato.length; i++) {
+                    extratoString += extrato[i] + '\n';
+                }
+                alert('Extrato:\n' + extratoString);
+            } else {
+                alert('Senha incorreta. Operação não autorizada.');
+            }
+            menu();
+        }
+
+        function fazer_deposito() {
+            var senha = prompt('Digite sua senha:');
+            if (senha === '3589') {
+                var deposito = parseFloat(prompt('Qual o valor para depósito?'));
+                if (isNaN(deposito) || deposito <= 0) {
+                    alert('Operação não autorizada. Por favor, informe um número válido.');
+                    fazer_deposito();
+                } else {
+                    saldo += deposito;
+                    extrato.push('Depósito: +' + deposito);
+                    alert('Depósito realizado com sucesso.');
+                }
+            } else {
+                alert('Senha incorreta. Operação não autorizada.');
+            }
+            menu();
+        }
+
+        function fazer_saque() {
+            var senha = prompt('Digite sua senha:');
+            if (senha === '3589') {
+                var saque = parseFloat(prompt('Qual o valor para saque?'));
+                if (isNaN(saque) || saque <= 0) {
+                    alert('Operação não autorizada. Por favor, informe um número válido.');
+                    fazer_saque();
+                } else if (saque > saldo) {
+                    alert('Operação não autorizada. Saldo insuficiente.');
+                } else {
+                    saldo -= saque;
+                    extrato.push('Saque: -' + saque);
+                    alert('Saque realizado com sucesso.');
+                }
+            } else {
+                alert('Senha incorreta. Operação não autorizada.');
+            }
+            menu();
+        }
+
+        function fazer_transferencia() {
+            var senha = prompt('Digite sua senha:');
+            if (senha === '3589') {
+                var conta = prompt('Digite o número da conta de destino:');
+                if (!conta || isNaN(conta)) {
+                    alert('Operação não autorizada. Por favor, informe um número válido.');
+                    fazer_transferencia();
+                    return;
+                }
+                var transferencia = parseFloat(prompt('Qual o valor para transferência?'));
+                if (isNaN(transferencia) || transferencia <= 0) {
+                    alert('Operação não autorizada. Por favor, informe um número válido.');
+                    fazer_transferencia();
+                } else if (transferencia > saldo) {
+                    alert('Operação não autorizada. Saldo insuficiente.');
+                } else {
+                    saldo -= transferencia;
+                    extrato.push('Transferência para conta ' + conta + ': -' + transferencia);
+                    alert('Transferência realizada com sucesso.');
+                }
+            } else {
+                alert('Senha incorreta. Operação não autorizada.');
+            }
+            menu();
+        }
+
+        function erro() {
+            alert('Por favor, informe uma opção válida (1 a 6).');
+            menu();
+        }
+
+        function sair() {
+            var nome = prompt('Digite seu nome:');
+            if (nome) {
+                alert(nome + ', foi um prazer ter você por aqui!');
+            }
+            var confirma = confirm('Você deseja sair?');
+            if (confirma) {
+                window.close();
+            } else {
+                menu();
+            }
+        }
+
+        inicio();
+    </script>
+</head>
+
+    
+<body>
+
+    
+</body>
+
+
+</html>
